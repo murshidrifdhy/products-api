@@ -27,6 +27,7 @@ public class ProductController {
         return productService.getProductById(id).orElse(null);
     }
 
+    // Use a concrete class because Jackson cannot create an abstract Product.
     @PostMapping("/products")
     public Product addProduct(@RequestBody DigitalProduct product) {
         return productService.addProduct(product);
@@ -40,5 +41,10 @@ public class ProductController {
     @GetMapping("/products/search")
     public List<Product> search(@RequestParam String name) {
         return productService.findByName(name);
+    }
+
+    @GetMapping("/products/summaries")
+    public List<String> getSummaries() {
+        return productService.getAllSummaries();
     }
 }
